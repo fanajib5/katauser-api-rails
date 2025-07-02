@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
-  
+
   setup do
     @admin = users(:admin)
     @user = users(:user)
@@ -12,7 +12,7 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
     sign_in @admin
     get '/api/v1/users'
     assert_response :success
-    
+
     json_response = JSON.parse(response.body)
     assert json_response.key?('users')
     assert json_response.key?('meta')
@@ -28,7 +28,7 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     get "/api/v1/users/#{@user.id}"
     assert_response :success
-    
+
     json_response = JSON.parse(response.body)
     assert_equal @user.email, json_response['user']['email']
   end
@@ -39,7 +39,7 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
       user: { first_name: 'Updated' }
     }
     assert_response :success
-    
+
     json_response = JSON.parse(response.body)
     assert_equal 'Updated', json_response['user']['first_name']
   end

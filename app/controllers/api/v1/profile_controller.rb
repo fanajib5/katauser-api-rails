@@ -1,11 +1,11 @@
 class Api::V1::ProfileController < Api::V1::BaseController
   before_action :authenticate_user!
-  
+
   # GET /api/v1/profile
   def show
     render json: { user: user_json(current_user) }
   end
-  
+
   # PATCH/PUT /api/v1/profile
   def update
     if current_user.update(profile_params)
@@ -14,19 +14,19 @@ class Api::V1::ProfileController < Api::V1::BaseController
       render json: { errors: current_user.errors }, status: :unprocessable_entity
     end
   end
-  
+
   # DELETE /api/v1/profile
   def destroy
     current_user.destroy
     head :no_content
   end
-  
+
   private
-  
+
   def profile_params
     params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
   end
-  
+
   def user_json(user)
     {
       id: user.id,
