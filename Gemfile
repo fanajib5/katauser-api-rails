@@ -60,4 +60,14 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem "byebug", platforms: [ :mri, :mingw, :x64_mingw ]
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "faker"
+end
+
+group :development do
+  gem "listen", "~> 3.3"
+  gem "spring"
 end
